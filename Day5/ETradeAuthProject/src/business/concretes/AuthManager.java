@@ -6,6 +6,7 @@ import business.validationTools.Validation;
 import core.accountServices.AccountService;
 import core.entities.dtos.LoginDto;
 import core.entities.dtos.RegisterDto;
+import core.userVerifications.emailServices.EmailVerify;
 import entities.concretes.User;
 
 
@@ -52,6 +53,7 @@ public class AuthManager implements AuthService{
 			System.out.println("Lütfen gmail uzantýlý email adresinizi giriniz");
 			return;
 		}
+		EmailVerify.sendMail(registerDto.getEmail());
 		System.out.println("Baþarýyla kayýt olundu");
 		var userToAdd = new User(0,registerDto.getFirstName(),registerDto.getLastName(),registerDto.getEmail(),registerDto.getPassword());
 		 this.userService.add(userToAdd);
